@@ -70,6 +70,10 @@ while i<900:
     img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
     cv2.imwrite('{}_gray.png'.format(new_dir),img_gray)
     loc1_x, loc1_y, w1, h1 = template_matching(img_gray, 'template1_11inch.png')
+    if loc1_x > 0:
+        crop_img1 = img_gray[loc1_x:loc1_x+h1, loc1_y:loc1_y+w1]
+        cv2.imwrite('{}_crop1.png'.format(new_dir), crop_img1)
+
     loc2_x, loc2_y, w2, h2 = template_matching(img_gray, 'template2_11inch.png')
     loc3_x, loc3_y, w3, h3 = template_matching(img_gray, 'template3_11inch.png')
     print("{}, {}, {}, {}".format(loc3_x, loc3_y, w3, h3))
