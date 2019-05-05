@@ -6,7 +6,10 @@ Dependencies Boostrapping:
 * ```safaridriver --enable```
 * Need to install Flash Player as Plugins in Safari
 
-
+Installation of Tesseract:
+* If brew is not installed (check by entering ```brew``` in the terminal)), run ```/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"```
+* ```brew install tesseract```
+* ```brew install tesseract-lang```
 
 How to get a floating Terminal console?
 * Download [iTerm](https://www.iterm2.com/downloads.html), unzip it and add it in Apllications folder on your Mac

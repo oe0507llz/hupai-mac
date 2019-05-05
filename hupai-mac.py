@@ -24,7 +24,7 @@ def template_matching(img_gray, template_image):
     loc = np.where( res >= threshold)
     #print(loc)
     if loc[0].size > 0:
-        return loc[0][0], loc[1][0], w, h
+        return loc[1][0], loc[0][0], w, h
     else:
         return 0, 0, w, h
 
@@ -71,11 +71,24 @@ while i<900:
     cv2.imwrite('{}_gray.png'.format(new_dir),img_gray)
     loc1_x, loc1_y, w1, h1 = template_matching(img_gray, 'template1_11inch.png')
     if loc1_x > 0:
-        crop_img1 = img_gray[loc1_x:loc1_x+h1, loc1_y:loc1_y+w1]
-        cv2.imwrite('{}_crop1.png'.format(new_dir), crop_img1)
+        crop_img1 = img_gray[loc1_y:loc1_y+h1, loc1_x+w1:int(loc1_x+w1*3/2)]
+        cv2.imwrite('{}{}/{}_crop1.png'.format(my_dir, fn, fn), crop_img1)
+        text1 = pytesseract.image_to_string(crop_img1, lang='eng', config = '-c tessedit_char_whitelist=0123456789')
+        if len(text1.replace(" ", "")) == 4:
+            int_text1 = int(text1.replace(" ", ""))*10
+        else:
+            int_text1 = int(text1)
+        print(int_text1)
 
     loc2_x, loc2_y, w2, h2 = template_matching(img_gray, 'template2_11inch.png')
+#    if loc2_x > 0:
+#        crop_img2 = img_gray[loc2_y:loc2_y+h2, loc2_x:loc2_x+w2]
+#        cv2.imwrite('{}{}/{}_crop2.png'.format(my_dir, fn, fn), crop_img2)
+    
     loc3_x, loc3_y, w3, h3 = template_matching(img_gray, 'template3_11inch.png')
+#    if loc3_x > 0:
+#        crop_img3 = img_gray[loc3_y:loc3_y+h3, loc3_x:loc3_x+w3]
+#        cv2.imwrite('{}{}/{}_crop3.png'.format(my_dir, fn, fn), crop_img3)
     print("{}, {}, {}, {}".format(loc3_x, loc3_y, w3, h3))
-    time.sleep(0.7)
+    time.sleep(0.5)
     i +=1
