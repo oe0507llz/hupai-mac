@@ -74,8 +74,18 @@ while i<900:
         crop_img1 = img_gray[loc1_y:loc1_y+h1, loc1_x+w1:int(loc1_x+w1*3/2)]
         cv2.imwrite('{}{}/{}_crop1.png'.format(my_dir, fn, fn), crop_img1)
         text1 = pytesseract.image_to_string(crop_img1, lang='eng', config = '-c tessedit_char_whitelist=0123456789')
-        if len(text1.replace(" ", "")) == 4:
-            int_text1 = int(text1.replace(" ", ""))*10
+        text1_s = text1.replace(" ", "")
+        for i in range(len(text1_s)):
+            if text1_s[i] == "8" or text1_s[i] == "9":
+                print(i)
+                text1_r = text1_s[i:]
+                break
+        if len(text1_r) > 5:
+            int_text1 = int(text1_r[0:5])
+        elif len(text1_r) == 4:
+            int_text1 = int(text1_r)*10
+        elif len(text1_r) == 3:
+            int_text1 = int(text1_r)*100
         else:
             int_text1 = int(text1)
         print(int_text1)
