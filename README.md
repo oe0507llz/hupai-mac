@@ -21,7 +21,8 @@ Historical data: <br>
 http://www.yunpaiwang.net/jiagezoushi/
 
 Remaining issues to solve:
-* Differentiate between moni and real and pass a parameter through the command line as an arg; Moni will start counting for the first recognized 8xxxx Lowest Transaction Pirce  while Real uses the computer system time.
+* Differentiate between moni and real and pass a parameter through the command line as an arg; Moni will start counting for the first recognized 8xxxx Lowest Transaction Pirce if time recognition fails to work out while Real uses the computer system time.
 * How to munual control at the same time when the safari is controlled by the selenium?
 * How to identify the same template with various screen sizes? Maybe I can find a solution to do the template matching with a varying scaling factor
 * How to use the same techniques on Windows?
+* Attempt tesseract OCR on the Captcha images
