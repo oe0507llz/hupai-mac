@@ -8,13 +8,19 @@ from datetime import datetime
 from dateutil import tz
 import cv2
 import numpy as np
+import sys
+firstarg=sys.argv[1]
 
 from_zone = tz.gettz('UTC')
 to_zone = tz.gettz('Asia/Shanghai')
-utc = datetime.utcnow()
-utc = utc.replace(tzinfo=from_zone)
-local = utc.astimezone(to_zone)
-initial_time = datetime.strftime(local, "%H:%M:%S")
+
+def shanghai_time_now():
+    utc = datetime.utcnow()
+    utc = utc.replace(tzinfo=from_zone)
+    local = utc.astimezone(to_zone)
+    return datetime.strftime(local, "%H:%M:%S")
+
+initial_time = shanghai_time_now()
 print(initial_time)
 
 today = str(datetime.today())
@@ -99,7 +105,7 @@ while i<900:
     img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
     #cv2.imwrite('{}_gray.png'.format(new_dir),img_gray)
 
-    time.sleep(0.1)
+    time.sleep(0.2)
 
     int_text1 = price_recognition(img_gray, 'template1_11inch.png', 1, 0.5)
     print(int_text1)
@@ -137,4 +143,17 @@ while i<900:
 #        crop_img3 = img_gray[loc3_y:loc3_y+h3, loc3_x:loc3_x+w3]
 #        cv2.imwrite('{}{}/{}_crop3.png'.format(my_dir, fn, fn), crop_img3)
     print("Location and size for submission: {}, {}, {}, {}".format(loc3_x, loc3_y, w3, h3))
+
+    if firstarg == 'moni':
+        loc4_x, loc4_y, w4, h4 = template_matching(img_gray, 'template4_11inch.png')
+        if loc4_x > 0:
+            crop_img4 = img_gray[loc4_y:loc4_y+h4, loc4_x+w4:int(loc4_x+2*w4)]
+            cv2.imwrite('{}{}/{}_crop4.png'.format(my_dir, fn, fn), crop_img4)
+            text4 = pytesseract.image_to_string(crop_img4, lang='eng', config = '-c tessedit_char_whitelist=0123456789:')
+        else:
+            text4 = shanghai_time_now()  
+    else:
+        text4 = shanghai_time_now()
+    print(text4)
+
     i +=1
