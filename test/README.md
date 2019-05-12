@@ -6,7 +6,7 @@ Covered testcase examples of numbers after tesseract OCR recognition (RMB symbol
 <br>- 8590, 9010
 <br>
 <br>
-How to make a decision on which data to take as the lowest transaction price?
+How to make a fault-tolerable decision on which data to take as the lowest transaction price?
 <br>- In case that all of three templates give the identical answer, it is simple and feel free to use it.
 <br>- In case that two templates give the identical answer, feel free to use it.
 <br>- In case that three templates give three different answers, use template1.
