@@ -19,3 +19,8 @@ How to get a floating Terminal console?
 
 Historical data: <br>
 http://www.yunpaiwang.net/jiagezoushi/
+
+Remaining issues to solve:
+* How to munual control at the same time when the safari is controlled by the selenium?
+* How to identify the same template with various screen sizes? Maybe I can find a solution to do the template matching with a varying scaling factor
+* How to use the same techniques on Windows?
