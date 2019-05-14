@@ -17,6 +17,13 @@ How to get a floating Terminal console?
 * Click Profiles that is on the left side of Keys, select Hotkey Window -> switch the panel from General to Window -> Styple: Top of Screen -> Settings for New Windows with Columns of 100 and Rows of 5 -> Close Preferences
 * Use Command + 1 to switch the new iTerm widows on and off
 
+To run for the moni website: <br>
+```
+git clone https://github.com/oe0507llz/hupai-mac.git
+cd hupai-mac
+python3 hupai-mac.py moni
+```
+
 Historical data: <br>
 http://www.yunpaiwang.net/jiagezoushi/
 
