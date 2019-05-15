@@ -1,0 +1,9 @@
+which -s brew
+if [[ $? != 0 ]] ; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+    brew update
+fi
+brew install python3 tesseract tesseract-lang
+pip3 install pyobjc-core pyobjc pyautogui pytesseract python-dateutil opencv-python
+safaridriver --enable
