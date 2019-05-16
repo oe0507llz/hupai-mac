@@ -1,9 +1,58 @@
-which -s brew
-if [[ $? != 0 ]] ; then
+# Check whether brew is installed
+if [[ $(command -v brew) == "" ]]; then
+    echo "Installing Hombrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
+    echo "Updating Homebrew"
     brew update
 fi
-brew install python3 tesseract tesseract-lang
-pip3 install pyobjc-core pyobjc pyautogui pytesseract python-dateutil opencv-python
+# Check whether python3 is installed
+if [[ $(command -v python3) == "" ]]; then
+    echo "Installing Python3"
+    brew install python3
+else
+    echo "Python3 is already installed"
+fi
+# Check whether tesseract is installed
+if [[ $(command -v tesseract) == "" ]]; then
+    echo "Installing Tesseract"
+    brew install tesseract tesseract-lang
+else
+    echo "Tesseract is already installed"
+fi
+# Install iTerm2
+# https://www.code2bits.com/how-to-install-iterm2-on-macos-using-homebrew/
+brew tap caskroom/cask
+brew search iterm2
+brew cask info iterm2
+brew cask install iterm2
+brew cleanup
+# Check whether python packages are installed; if not, install them
+# https://unix.stackexchange.com/questions/235230/how-to-check-if-a-module-or-a-package-is-already-installed-in-python3
+if python3 -c "import selenium" &> /dev/null; then
+    echo 'Selenium installed'
+else
+    pip3 install selenium
+fi
+if python3 -c "import pyautogui" &> /dev/null; then
+    echo 'Pyautogui installed'
+else
+    pip3 install pyobjc-core pyobjc pyautogui
+fi
+if python3 -c "import pytesseract" &> /dev/null; then
+    echo 'Pytesseract installed'
+else
+    pip3 install pytesseract
+fi
+if python3 -c "import dateutil" &> /dev/null; then
+    echo 'Python-dateutil installed'
+else
+    pip3 install python-dateutil
+fi
+if python3 -c "import cv2" &> /dev/null; then
+    echo 'OpenCV installed'
+else
+    pip3 install opencv-python
+fi
+# Enable Safari Driver for selenium control
 safaridriver --enable
