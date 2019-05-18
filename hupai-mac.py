@@ -64,25 +64,27 @@ def price_recognition(img_gray, template_image, relative_h, relative_w):
         cv2.imwrite('{}{}/{}_crop_{}.png'.format(my_dir, fn, fn, str(datetime.today()).replace(" ", "")), crop_img1)
         text1 = pytesseract.image_to_string(crop_img1, lang='eng', config = '-c tessedit_char_whitelist=0123456789')
         print(text1)
-        text1_s = ''.join(i for i in text1 if i.isdigit())
-        print(text1_s)
-        for i in range(len(text1_s)):
-            if text1_s[i] == "8" or text1_s[i] == "9":
-                #print(i)
-                text1_r = text1_s[i:]
-                break
+        if text1:
+            text1_s = ''.join(i for i in text1 if i.isdigit())
+            print(text1_s)
+            for i in range(len(text1_s)):
+                if text1_s[i] == "8" or text1_s[i] == "9":
+                    #print(i)
+                    text1_r = text1_s[i:]
+                    break
+                else:
+                    text1_r = text1_s
+            if len(text1_r) > 5:
+                int_text1 = int(text1_r[0:5])
+            elif len(text1_r) == 4:
+                int_text1 = int(text1_r)*10
+            elif len(text1_r) == 3:
+                int_text1 = int(text1_r)*100
             else:
-                text1_r = text1_s
-        if len(text1_r) > 5:
-            int_text1 = int(text1_r[0:5])
-        elif len(text1_r) == 4:
-            int_text1 = int(text1_r)*10
-        elif len(text1_r) == 3:
-            int_text1 = int(text1_r)*100
+                int_text1 = int(text1_r)
+            return int_text1
         else:
-            int_text1 = int(text1_r)
-        return int_text1
-
+            return text1
 
 
 url = 'http://moni.51hupai.com/'
@@ -92,6 +94,14 @@ browser.get(url)
 browser.maximize_window()
 #browser.close()
 
+ref = np.array(pyautogui.screenshot())
+
+height, width = ref.shape[:2]
+
+if height == 1600 and width == 2560:
+    screen_size = "13inch_retina"
+else:
+    screen_size = "11inch" 
 
 while i<900:
     fn = "screen_{}".format(i)
@@ -107,17 +117,17 @@ while i<900:
 
     time.sleep(0.2)
 
-    int_text1 = price_recognition(img_gray, 'template1_11inch.png', 1, 0.5)
+    int_text1 = price_recognition(img_gray, 'template1_{}.png'.format(screen_size), 1, 0.5)
     print(int_text1)
 
-    int_text1a_pre = price_recognition(img_gray, 'template1a_11inch.png', 1, 0.3)
+    int_text1a_pre = price_recognition(img_gray, 'template1a_{}.png'.format(screen_size), 1, 0.3)
     if int_text1a_pre:
         int_text1a = int_text1a_pre + 300
     else:
         int_text1a = int_text1a_pre
     print(int_text1a)
 
-    int_text1b = price_recognition(img_gray, 'template1b_11inch.png', 2.3, 1.5)
+    int_text1b = price_recognition(img_gray, 'template1b_{}.png'.format(screen_size), 2.3, 1.5)
     print(int_text1b)
 
     if int_text1 == int_text1a or int_text1 == int_text1b:
@@ -133,19 +143,19 @@ while i<900:
 
     print("Lowest Transaction Pirce is {}".format(lowest_price))
 
-    loc2_x, loc2_y, w2, h2 = template_matching(img_gray, 'template2_11inch.png')
+    loc2_x, loc2_y, w2, h2 = template_matching(img_gray, 'template2_{}.png'.format(screen_size))
 #    if loc2_x > 0:
 #        crop_img2 = img_gray[loc2_y:loc2_y+h2, loc2_x:loc2_x+w2]
 #        cv2.imwrite('{}{}/{}_crop2.png'.format(my_dir, fn, fn), crop_img2)
     
-    loc3_x, loc3_y, w3, h3 = template_matching(img_gray, 'template3_11inch.png')
+    loc3_x, loc3_y, w3, h3 = template_matching(img_gray, 'template3_{}.png'.format(screen_size))
 #    if loc3_x > 0:
 #        crop_img3 = img_gray[loc3_y:loc3_y+h3, loc3_x:loc3_x+w3]
 #        cv2.imwrite('{}{}/{}_crop3.png'.format(my_dir, fn, fn), crop_img3)
     print("Location and size for submission: {}, {}, {}, {}".format(loc3_x, loc3_y, w3, h3))
 
     if firstarg == 'moni':
-        loc4_x, loc4_y, w4, h4 = template_matching(img_gray, 'template4_11inch.png')
+        loc4_x, loc4_y, w4, h4 = template_matching(img_gray, 'template4_{}.png'.format(screen_size))
         if loc4_x > 0:
             crop_img4 = img_gray[loc4_y:loc4_y+h4, loc4_x+w4:int(loc4_x+2*w4)]
             cv2.imwrite('{}{}/{}_crop4.png'.format(my_dir, fn, fn), crop_img4)
