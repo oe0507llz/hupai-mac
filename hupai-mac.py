@@ -66,6 +66,7 @@ def price_recognition(img_gray, template_image, relative_h, relative_w):
         print(text1)
         if text1:
             text1_s = ''.join(i for i in text1 if i.isdigit())
+            text1_r = text1_s
             print(text1_s)
             for i in range(len(text1_s)):
                 if text1_s[i] == "8" or text1_s[i] == "9":
@@ -127,7 +128,7 @@ while i<900:
         int_text1a = int_text1a_pre
     print(int_text1a)
 
-    int_text1b = price_recognition(img_gray, 'template1b_{}.png'.format(screen_size), 2.3, 1.5)
+    int_text1b = price_recognition(img_gray, 'template1b_{}.png'.format(screen_size), 2.2, 1.5)
     print(int_text1b)
 
     if int_text1 == int_text1a or int_text1 == int_text1b:
