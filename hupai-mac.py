@@ -104,7 +104,7 @@ if height == 1600 and width == 2560:
 else:
     screen_size = "11inch" 
 
-while i<900:
+while i<1800:
     fn = "screen_{}".format(i)
     new_dir = my_dir + fn
     pyautogui.screenshot("{}.png".format(new_dir))
@@ -116,7 +116,7 @@ while i<900:
     img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
     #cv2.imwrite('{}_gray.png'.format(new_dir),img_gray)
 
-    time.sleep(0.2)
+    #time.sleep(0.2)
 
     int_text1 = price_recognition(img_gray, 'template1_{}.png'.format(screen_size), 1, 0.5)
     print(int_text1)
