@@ -144,17 +144,6 @@ while i<1800:
 
     print("Lowest Transaction Pirce is {}".format(lowest_price))
 
-    loc2_x, loc2_y, w2, h2 = template_matching(img_gray, 'template2_{}.png'.format(screen_size))
-#    if loc2_x > 0:
-#        crop_img2 = img_gray[loc2_y:loc2_y+h2, loc2_x:loc2_x+w2]
-#        cv2.imwrite('{}{}/{}_crop2.png'.format(my_dir, fn, fn), crop_img2)
-    
-    loc3_x, loc3_y, w3, h3 = template_matching(img_gray, 'template3_{}.png'.format(screen_size))
-#    if loc3_x > 0:
-#        crop_img3 = img_gray[loc3_y:loc3_y+h3, loc3_x:loc3_x+w3]
-#        cv2.imwrite('{}{}/{}_crop3.png'.format(my_dir, fn, fn), crop_img3)
-    print("Location and size for submission: {}, {}, {}, {}".format(loc3_x, loc3_y, w3, h3))
-
     if firstarg == 'moni':
         loc4_x, loc4_y, w4, h4 = template_matching(img_gray, 'template4_{}.png'.format(screen_size))
         if loc4_x > 0:
@@ -166,5 +155,30 @@ while i<1800:
     else:
         text4 = shanghai_time_now()
     print(text4)
+
+    if text4 == "11:29:44" or text4 == "11:29:45":
+        number_int = lowest_price +900
+        number = str(number_int)
+        loc2_x, loc2_y, w2, h2 = template_matching(img_gray, 'template2_{}.png'.format(screen_size))
+#    if loc2_x > 0:
+#        crop_img2 = img_gray[loc2_y:loc2_y+h2, loc2_x:loc2_x+w2]
+#        cv2.imwrite('{}{}/{}_crop2.png'.format(my_dir, fn, fn), crop_img2)
+        pyautogui.moveTo(loc2_x+w2, loc2_y+h2)
+        pyautogui.click()
+        pyautogui.doubleClick()
+        time.sleep(0.5)
+        pyautogui.doubleClick()
+        pyautogui.press('del')
+        time.sleep(0.5)
+        pyautogui.typewrite(number)
+
+
+    
+        loc3_x, loc3_y, w3, h3 = template_matching(img_gray, 'template3_{}.png'.format(screen_size))
+#    if loc3_x > 0:
+#        crop_img3 = img_gray[loc3_y:loc3_y+h3, loc3_x:loc3_x+w3]
+#        cv2.imwrite('{}{}/{}_crop3.png'.format(my_dir, fn, fn), crop_img3)
+        print("Location and size for submission: {}, {}, {}, {}".format(loc3_x, loc3_y, w3, h3))
+
 
     i +=1

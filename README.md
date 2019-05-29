@@ -3,7 +3,7 @@
 Dependencies Boostrapping:
 * ```bash install```
 * Need to install Flash Player as Plugins in Safari
-
+* System Preferences -> Security & Privacy -> Privacy -> Accessibility -> Click the lock to make changes -> Allow iTerm to control your computer
 
 How to get a floating iTerm console (iTerm should have been installed after ```bash install```)?
 * iTerm2 -> Preferences -> Keys -> Create a Dedicated Hotkey Window -> click on the space after Hotkey: and enter your hotkey (such as Command + 1) after it turns recording -> Select Floating Windows -> Click Ok
