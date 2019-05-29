@@ -2,7 +2,7 @@
 
 Dependencies Boostrapping:
 * ```bash install```
-* Need to install Flash Player as Plugins in Safari
+* Test by opening http://moni.51hupai.com/ in safari browser. If everything is displayed well, that is great. Otherwise, you need to follow the instruction from the webpage and install Flash Player as Plugins in Safari
 * System Preferences -> Security & Privacy -> Privacy -> Accessibility -> Click the lock to make changes -> Allow iTerm to control your computer
 
 How to get a floating iTerm console (iTerm should have been installed after ```bash install```)?
