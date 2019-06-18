@@ -1,17 +1,19 @@
 import time
 import os
 from PIL import Image
-import pytesseract
-import pyautogui
-from selenium import webdriver
+import pytesseract #OCR image, google, good at english/digits. Look for alternative for chinese
+import pyautogui # click, screenshot
+from selenium import webdriver # control safari, WX python
 from datetime import datetime
 from dateutil import tz
 import cv2
 import numpy as np
 import sys
-firstarg=sys.argv[1]
 
-from_zone = tz.gettz('UTC')
+
+firstarg=sys.argv[1] #take moni from terminal, 2nd arg
+
+from_zone = tz.gettz('UTC') #change time zone
 to_zone = tz.gettz('Asia/Shanghai')
 
 def shanghai_time_now():
@@ -20,6 +22,7 @@ def shanghai_time_now():
     local = utc.astimezone(to_zone)
     return datetime.strftime(local, "%H:%M:%S")
 
+# put screenshots into dir with date info
 initial_time = shanghai_time_now()
 print(initial_time)
 
@@ -33,7 +36,8 @@ my_dir = os.path.expanduser('~/{}/'.format(directory))
 if not os.path.exists(my_dir):
     os.makedirs(my_dir)
 
-# Specify a threshold
+
+# Specify a threshold for image recog
 threshold = 0.75
 i = 0
 
@@ -98,9 +102,14 @@ browser.maximize_window()
 ref = np.array(pyautogui.screenshot())
 
 height, width = ref.shape[:2]
+print(height)
+print(width)
+# add condition for 15 inch
 
 if height == 1600 and width == 2560:
     screen_size = "13inch_retina"
+elif height== 2100 and width == 3360:
+    screen_size = "15inch_retina"
 else:
     screen_size = "11inch" 
 
@@ -142,7 +151,7 @@ while i<1800:
     else:
         lowest_price = int_text1a
 
-    print("Lowest Transaction Pirce is {}".format(lowest_price))
+    print("Lowest Transaction Price is {}".format(lowest_price))
 
     if firstarg == 'moni':
         loc4_x, loc4_y, w4, h4 = template_matching(img_gray, 'template4_{}.png'.format(screen_size))
