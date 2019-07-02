@@ -1,6 +1,6 @@
 # hupai-mac
 
-Dependencies Boostrapping:
+### Dependencies Boostrapping:
 * ```bash install```
 * Test by opening http://moni.51hupai.com/ in safari browser. If everything is displayed well, that is great. Otherwise, you need to follow the instruction from the webpage and install Flash Player as Plugins in Safari
 * System Preferences -> Security & Privacy -> Privacy -> Accessibility -> Click the lock to make changes -> Allow iTerm to control your computer
@@ -17,12 +17,17 @@ cd hupai-mac
 python3 hupai-mac.py moni
 ```
 
-Historical data: <br>
+### Historical data: <br>
 http://www.yunpaiwang.net/jiagezoushi/
 
-Remaining issues to solve:
+### Remaining issues to solve:
 * Differentiate between moni and real and pass a parameter through the command line as an arg; Moni will start counting for the first recognized 8xxxx Lowest Transaction Pirce if time recognition fails to work out while Real uses the computer system time.
 * How to munual control at the same time when the safari is controlled by the selenium?
 * How to identify the same template with various screen sizes? Maybe I can find a solution to do the template matching with a varying scaling factor
 * How to use the same techniques on Windows?
 * Attempt tesseract OCR on the Captcha images
+
+Useful Information:
+* wxPython demo and samples: https://extras.wxpython.org/wxPython4/extras/4.0.6/wxPython-demo-4.0.6.tar.gz
+* hupai browser test: https://test.alltobid.com
+
