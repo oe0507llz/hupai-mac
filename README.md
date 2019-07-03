@@ -27,7 +27,7 @@ http://www.yunpaiwang.net/jiagezoushi/
 * How to use the same techniques on Windows?
 * Attempt tesseract OCR on the Captcha images
 
-Useful Information:
+### Useful Information:
 * wxPython demo and samples: https://extras.wxpython.org/wxPython4/extras/4.0.6/wxPython-demo-4.0.6.tar.gz
 * hupai browser test: https://test.alltobid.com
-
+* hupai wxpython example: https://github.com/zs3189/-/blob/master/assistant9.732s.py
